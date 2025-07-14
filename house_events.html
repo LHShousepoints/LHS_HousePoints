@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- page title -->
+    <title>House Events</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <!-- font being used for the page -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <link rel="stylesheet" href="house_events.css">
+    <link href='https://fonts.googleapis.com/css?family=Archivo' rel='stylesheet'>
+    <!-- animation being used for the header -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+  </head>
+  
+  <body>
+    <!-- navbar titles -->
+    <div class="navbar">
+      <a href="index.html#" target="_self">House Points</a>
+      <a href="house_events.html" target="_self">House Events</a>
+      </div>
+
+      <div class="header">
+        <!-- header title/centering/animation and image -->
+        <img class="logo" src="lhs_logo.png" alt="logo" style="margin-top: -34px;"/>
+        <h1 class="animate__animated animate__backInRight" style="margin: 0 auto; width: fit-content;">House Events</h1>
+      </div>
+
+      <div class="display-image">
+        
+          <!-- loading display for the house events -->
+          <pre id="events" style="font-size: 30px; font-family: 'Archivo';">Loading...</pre>
+          <!-- background image -->
+        <img class="design" src="House design2.png"/>
+    </div>
+
+          <!-- Firebase compatibility SDKs for application function-->
+  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-database-compat.js"></script>
+  
+  <script>
+    // firebase initialisation
+    const firebaseConfig = {
+      apiKey: "AIzaSyDGkNus0BpWcV68Xhcgl-iWkHNmYbaLDiU",
+      authDomain: "house-points-83688.firebaseapp.com",
+      databaseURL: "https://house-points-83688-default-rtdb.firebaseio.com",
+      projectId: "house-points-83688",
+      storageBucket: "house-points-83688.firebasestorage.app",
+      messagingSenderId: "706900936679",
+      appId: "1:706900936679:web:21e15da81946fb41b29f42",
+      measurementId: "G-83FTQPYTEL"
+    };
+    
+    // Initialise Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+    
+    
+    // Load and display the events
+    const eventDataDisplay = document.getElementById('events');
+    const eventRef = db.ref('events/lhs');
+    eventRef.on('value', snapshot => {
+      const eventData = snapshot.val() || 0;
+      eventDataDisplay.textContent = eventData;
+    });
+
+    
+    </script>
+    </body>
+    </html>
